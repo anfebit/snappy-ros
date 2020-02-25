@@ -25,45 +25,48 @@ module.exports = function(RED) {
     })
 
     node.on('input', function(msg) {
-      // var msgType = rosnodejs.require(config.typepackage)
-      // 	.msg[config.typename]
-      //
-      // var x = new msgType()
-      // x = msg.payload
-      // 
-      // node.pub.publish(x)
+       var msgType = rosnodejs.require(config.typepackage)
+       	.msg[config.typename]
+      
+       var x = new msgType()
+       x = msg.payload
+       
+       node.pub.publish(x)
     })
 
-    // var sub_callback = function(msg) {
-    //   var o = JSON.parse(JSON.stringify(msg))
-    //
-    //   node.send({
-    //     payload: o
-    //   })
-    // }
+     var sub_callback = function(msg) {
+       var o = JSON.parse(JSON.stringify(msg))
+    
+       node.send({
+         payload: o
+       })
+     }
 
     node.on('close', function(done) {
-      // debug('Unsubscribing node on topic :', config.topicname)
-      //
-      // if (node.ros) {
-      //   node.ros.unsubscribe(config.topicname)
-      //     .then(function() {
-      //       debug('unsubscribed')
-      //       done()
-      //     })
-      // } else {
+       debug('Unsubscribing node on topic :', config.topicname)
+       if (node.ros) {
+         node.ros.unsubscribe(config.topicname)
+           .then(function() {
+             debug('unsubscribed')
+             done()
+           })
+       } else {
       done()
-      // }
+     }
     })
 
     ros_server(RED, node)
       .then(function(nodeHandle) {
         node.ros = nodeHandle
-        // node.sub = node.ros.subscribe(config.topicname, config.typepackage + '/' + config.typename, sub_callback)
+        node.pub = node.ros.advertiseService(config.topicname, config.typepackage + '/' + config.typename)
       })
       .catch(function(e) {
         debug('Er', e)
       })
   }
   RED.nodes.registerType("ros-service-client", ros_service_client)
+}
+
+
+
 }
