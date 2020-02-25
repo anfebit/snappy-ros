@@ -66,7 +66,3 @@ module.exports = function(RED) {
   }
   RED.nodes.registerType("ros-service-client", ros_service_client)
 }
-
-
-
-}
