@@ -46,13 +46,13 @@ module.exports = function(RED) {
     ros_server(RED, node)
       .then(function(nodeHandle) {
         node.ros = nodeHandle
-        node.sub = node.ros.advertiseService(config.topicname, config.typepackage + '/' + config.typename,  req_rep)
+        node.sub = node.ros.advertiseService(config.topicname, config.typepackage + '/' + config.typename)
       })
       .catch(function(e) {
         debug('Er', e)
       })
   }
-  RED.nodes.registerType("ros-service-client", ros-service-client)
+  RED.nodes.registerType("ros-service-client", ros_service_client)
 }
 
 // module.exports = function(RED) {
