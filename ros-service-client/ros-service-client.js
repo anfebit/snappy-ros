@@ -26,16 +26,15 @@ module.exports = function(RED) {
 
     else{
       // do the req
-      ros_server(RED, node)
-        .then(function(nodeHandle){
+        ros_server(RED, node)
+          .then(function(nodeHandle){
           node.ros = nodeHandle
-          node.client = node.ros.serviceClient(config.topicname, config.typepackage + '/' + config.typename)
-          node.client.call({str : 'casa'})
-          
+          node.service = node.ros.advertiseService(config.topicname, config.typepackage + '/' + config.typename, req_rep)
         })
         .catch(function(e)){
           debug('Er', e)
         }
+
     }
 
     var req_rep = (req, rep) =>{
