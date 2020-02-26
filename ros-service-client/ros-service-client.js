@@ -38,10 +38,10 @@ module.exports = function(RED) {
       done()
     })  
 
-    var req_rep = (req, rep) =>{
-      console.log('got req', req)
-      node.send(req)
-    } 
+    // var req_rep = (req, rep) =>{
+    //   console.log('got req', req)
+    //   node.send(req)
+    // } 
 
     ros_server(RED, node)
       .then(function(nodeHandle) {
