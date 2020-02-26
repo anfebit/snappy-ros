@@ -25,17 +25,17 @@ module.exports = function(RED) {
     }
 
     else{
-      // // do the req
-      // ros_server(RED, node)
-      //   .then(function(nodeHandle){
-      //     node.ros = nodeHandle
-      //     node.client = node.ros.serviceClient(config.topicname, config.typepackage + '/' + config.typename)
-      //     node.client.call({str : 'casa'})
+      // do the req
+      ros_server(RED, node)
+        .then(function(nodeHandle){
+          node.ros = nodeHandle
+          node.client = node.ros.serviceClient(config.topicname, config.typepackage + '/' + config.typename)
+          node.client.call({str : 'casa'})
           
-      //   })
-      //   .catch(function(e)){
-      //     debug('Er', e)
-      //   }
+        })
+        .catch(function(e)){
+          debug('Er', e)
+        }
     }
 
     var req_rep = (req, rep) =>{
