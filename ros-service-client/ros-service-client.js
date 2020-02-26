@@ -14,7 +14,6 @@ module.exports = function(RED)
 
     if(node === 'rep'){
       node.ros = nodeHandle
-
     }
 
     var req_rep = (req, rep) =>{
@@ -31,8 +30,8 @@ module.exports = function(RED)
         debug('Er', e)
       })
   }
-  RED.nodes.registerType("rosOutServiceClient", rosOutServiceClient)
-  
+  RED.nodes.registerType("ros-service-client", "ros-service-client")
+
 }
 
 // module.exports = function(RED) {
