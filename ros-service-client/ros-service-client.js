@@ -7,7 +7,7 @@ const ros_server = require(path.join(__dirname, '..', 'ros_server.js'))
 
 
 module.exports = function(RED) {
-  var = ros_service_client = function(config){
+  var ros_service_client = function(config) {
     RED.nodes.createNode(this, config)
     var node = this
 
@@ -38,15 +38,11 @@ module.exports = function(RED) {
       done()
     })  
 
-    // var req_rep = (req, rep) =>{
-    //   console.log('got req', req)
-    //   node.send(req)
-    // } 
 
     ros_server(RED, node)
       .then(function(nodeHandle) {
         node.ros = nodeHandle
-        node.sub = node.ros.advertiseService(config.topicname, config.typepackage + '/' + config.typename)
+        // node.sub = node.ros.advertiseService(config.topicname, config.typepackage + '/' + config.typename)
       })
       .catch(function(e) {
         debug('Er', e)
