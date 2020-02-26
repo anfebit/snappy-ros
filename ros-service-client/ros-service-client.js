@@ -13,29 +13,29 @@ module.exports = function(RED) {
 
     console.log('intype  ', config.intype)
     if(config.intype === 'rep'){
-      // do the reply
-      ros_server(RED, node)
-        .then(function(nodeHandle){
-          node.ros = nodeHandle
-          node.service = node.ros.advertiseService(config.topicname, config.typepackage + '/' + config.typename, req_rep)
-        })
-        .catch(function(e)){
-          debug('Er', e)
-        }
+      // // do the reply
+      // ros_server(RED, node)
+      //   .then(function(nodeHandle){
+      //     node.ros = nodeHandle
+      //     node.service = node.ros.advertiseService(config.topicname, config.typepackage + '/' + config.typename, req_rep)
+      //   })
+      //   .catch(function(e)){
+      //     debug('Er', e)
+      //   }
     }
 
     else{
-      // do the req
-      ros_server(RED, node)
-        .then(function(nodeHandle){
-          node.ros = nodeHandle
-          node.client = node.ros.serviceClient(config.topicname, config.typepackage + '/' + config.typename)
-          node.client.call({str : 'casa'})
+      // // do the req
+      // ros_server(RED, node)
+      //   .then(function(nodeHandle){
+      //     node.ros = nodeHandle
+      //     node.client = node.ros.serviceClient(config.topicname, config.typepackage + '/' + config.typename)
+      //     node.client.call({str : 'casa'})
           
-        })
-        .catch(function(e)){
-          debug('Er', e)
-        }
+      //   })
+      //   .catch(function(e)){
+      //     debug('Er', e)
+      //   }
     }
 
     var req_rep = (req, rep) =>{
@@ -43,15 +43,6 @@ module.exports = function(RED) {
       rep.str = '{"test": true}'
       return true
     }
-
-    // ros_server(RED, node)
-    //   .then(function(nodeHandle) {
-    //     node.ros = nodeHandle
-    //     node.sub = node.ros.advertiseService(config.topicname, config.typepackage + '/' + config.typename, req_rep)
-    //   })
-    //   .catch(function(e) {
-    //     debug('Er', e)
-    //   })
   }
   RED.nodes.registerType("ros-service-client", ros_service_client)
 }
