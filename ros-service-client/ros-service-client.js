@@ -30,7 +30,7 @@ module.exports = function(RED) {
         .then(function(nodeHandle){
           node.ros = nodeHandle
           node.client = node.ros.serviceClient(config.topicname, config.typepackage + '/' + config.typename)
-          node.client.call()
+          node.client.call({str : 'casa'})
           
         })
         .catch(function(e)){
@@ -40,7 +40,7 @@ module.exports = function(RED) {
 
     var req_rep = (req, rep) =>{
       console.log('got req', req)
-      res.str = '{"test": true}';
+      rep.str = '{"test": true}'
       return true
     }
 
