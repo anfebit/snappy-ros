@@ -30,7 +30,7 @@ module.exports = function(RED)
         debug('Er', e)
       })
   }
-  RED.nodes.registerType("ros-service-client", "ros-service-client")
+  RED.nodes.registerType("ros-service-client", ros-service-client)
 }
 
 // module.exports = function(RED) {
