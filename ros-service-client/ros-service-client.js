@@ -8,7 +8,7 @@ const ros_server = require(path.join(__dirname, '..', 'ros_server.js'))
 
 module.exports = function(RED)
 {
-  function rosOutServiceClient(config){
+  function ros_service_client(config){
     RED.nodes.createNode(this, config)
     var node = this
 
