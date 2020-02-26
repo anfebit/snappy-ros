@@ -6,15 +6,37 @@ const debug = require('debug')('snappy:ros:service-client')
 const ros_server = require(path.join(__dirname, '..', 'ros_server.js'))
 
 
-module.exports = function(RED)
-{
- var = ros_service_client = function(config){
+module.exports = function(RED) {
+  var = ros_service_client = function(config){
     RED.nodes.createNode(this, config)
     var node = this
 
-    if(node === 'rep'){
-      node.ros = nodeHandle
-    }
+    // if(node === 'rep'){
+    //   node.ros = nodeHandle
+    // }
+
+      node.status({
+      fill: 'yellow',
+      shape: 'ring',
+      text: 'connecting to ros master..'
+    })
+
+    node.on('connected to ros', function() {
+      node.status({
+        fill: 'green',
+        shape: 'dot',
+        text: 'connected'
+      })
+    })
+
+    node.on('input', function(msg) {
+
+    })
+
+    node.on('close', function(done) {
+
+      done()
+    })  
 
     var req_rep = (req, rep) =>{
       console.log('got req', req)
