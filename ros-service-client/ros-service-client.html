@@ -18,10 +18,13 @@
 					return (window.list_package.indexOf(this.typepackage) > -1) && (window.list[this.typepackage].indexOf(v) > -1)
 				},
 				required: true
+			},
+			intype: {
+				value: 'Request'
 			}
 		},
 		inputs: 1,
-		outputs: 0,
+		outputs: 1,
 		paletteLabel: 'service-client',
 		icon: "ros_logo.png",
 		label: function() {
@@ -53,7 +56,9 @@
 			})
 
 			loadPackage(node.typepackage, node.typename)
-		}
+		},
+
+		outputLabels: function(index) { return this.intype; }
 	})
 
 	var loadPackage = function(typepackage, typename) {
@@ -149,6 +154,14 @@
 		<label for="node-input-typepackage">Datatype package</label>
 		<select id="node-input-typepackage"></select>
 	</div>
+
+	<div class="form-row">
+        <label for="node-type">
+        <select id="node-input-intype">
+            <option value="req">Request</option>
+            <option value="rep">Response</option>
+        </select>
+    </div>
 
 	<div class="form-row">
 		<label for="node-input-typename">Datatype</label>

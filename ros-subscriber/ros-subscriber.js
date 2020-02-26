@@ -57,3 +57,4 @@ module.exports = function(RED) {
   }
   RED.nodes.registerType("ros-subscriber", ros_subscriber)
 }
+
