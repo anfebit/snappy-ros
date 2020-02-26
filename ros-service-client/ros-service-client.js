@@ -8,7 +8,7 @@ const ros_server = require(path.join(__dirname, '..', 'ros_server.js'))
 
 module.exports = function(RED)
 {
-  function ros_service_client(config){
+ var = ros_service_client = function(config){
     RED.nodes.createNode(this, config)
     var node = this
 
@@ -31,7 +31,6 @@ module.exports = function(RED)
       })
   }
   RED.nodes.registerType("ros-service-client", "ros-service-client")
-
 }
 
 // module.exports = function(RED) {
