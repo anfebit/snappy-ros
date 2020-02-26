@@ -11,9 +11,10 @@ module.exports = function(RED) {
     RED.nodes.createNode(this, config)
     var node = this
 
-    // if(node === 'rep'){
-    //   node.ros = nodeHandle
-    // }
+    console.log('intype  ', node.intype)
+    if(node.intype === 'rep'){
+      node.ros = nodeHandle
+    }
 
       node.status({
       fill: 'yellow',
