@@ -34,15 +34,18 @@ module.exports = function(RED) {
     })
 
     node.on('close', function(done) {
-
       done()
     })  
 
+    var req_rep = (req, rep) =>{
+      console.log('got req', req)
+      return true
+    }
 
     ros_server(RED, node)
       .then(function(nodeHandle) {
         node.ros = nodeHandle
-        // node.sub = node.ros.advertiseService(config.topicname, config.typepackage + '/' + config.typename)
+        node.sub = node.ros.advertiseService(config.topicname, config.typepackage + '/' + config.typename, req_rep)
       })
       .catch(function(e) {
         debug('Er', e)
