@@ -13,15 +13,15 @@ module.exports = function(RED) {
 
     console.log('intype  ', config.intype)
     if(config.intype === 'rep'){
-      // // do the reply
-      // ros_server(RED, node)
-      //   .then(function(nodeHandle){
-      //     node.ros = nodeHandle
-      //     node.service = node.ros.advertiseService(config.topicname, config.typepackage + '/' + config.typename, req_rep)
-      //   })
-      //   .catch(function(e)){
-      //     debug('Er', e)
-      //   }
+      // do the reply
+      ros_server(RED, node)
+        .then(function(nodeHandle){
+          node.ros = nodeHandle
+          node.service = node.ros.advertiseService(config.topicname, config.typepackage + '/' + config.typename, req_rep)
+        })
+        .catch(function(e)){
+          debug('Er', e)
+        }
     }
 
     else{
