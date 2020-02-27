@@ -20,18 +20,18 @@ module.exports = function(RED) {
     console.log('intype  ', config.intype)
    
     if(config.intype === 'req'){
-      // // do the req
-      // // advertiseService with (req, rep)
-      // rosPromise = ros_server(RED, node)
-      // console.log("promise   ", rosPromise)
-      // rosPromise.then(nodeHandle =>{
-      //   node.ros = nodeHandle
-      //   node.service =  node.service = node.ros.advertiseService(config.topicname, config.typepackage + '/' + config.typename, rep_req)
+      // do the req
+      // advertiseService with (req, rep)
+      rosPromise = ros_server(RED, node)
+      console.log("promise   ", rosPromise)
+      rosPromise.then(nodeHandle =>{
+        node.ros = nodeHandle
+        node.service =  node.service = node.ros.advertiseService(config.topicname, config.typepackage + '/' + config.typename, rep_req)
 
-      // })
-      // rosPromise.catch(e => {
-      //    debug('Er', e)
-      // })
+      })
+      rosPromise.catch(e => {
+         debug('Er', e)
+      })
   }
     else{
   //     // do the resp  
