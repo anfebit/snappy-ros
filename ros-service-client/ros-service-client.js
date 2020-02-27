@@ -44,9 +44,10 @@ module.exports = function(RED) {
   //     }
   //   }
   // }
-  RED.nodes.registerType("ros-service-client", ros_service_client)
+    RED.nodes.registerType("ros-service-client", ros_service_client)
+    }
+  }
 }
-
 // module.exports = function(RED) {
 //   var ros_service_client = function(config) {
 //     RED.nodes.createNode(this, config)
