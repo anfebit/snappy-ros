@@ -19,10 +19,11 @@ module.exports = function(RED) {
 
     console.log('intype  ', config.intype)
    
+   
     if(config.intype === 'req'){
       // do the req
       // advertiseService with (req, rep)
-      rosPromise = ros_server(RED, node)
+      const rosPromise = ros_server(RED, node)
       console.log("promise   ", rosPromise)
       rosPromise.then(nodeHandle =>{
         node.ros = nodeHandle
