@@ -11,36 +11,37 @@ module.exports = function(RED) {
     RED.nodes.createNode(this, config)
     var node = this
 
-    console.log('intype  ', config.intype)
-    if(config.intype === 'rep'){
-      // do the reply
-      ros_server(RED, node)
-        .then(function(nodeHandle){
-          node.ros = nodeHandle
-          node.service = node.ros.advertiseService(config.topicname, config.typepackage + '/' + config.typename, req_rep)
-        })
-        .catch(function(e)){
-          debug('Er', e)
-        }
-    }
-
-    else{
-      // do the req
-        ros_server(RED, node)
-          .then(function(nodeHandle){
-          node.ros = nodeHandle
-          node.service = node.ros.advertiseService(config.topicname, config.typepackage + '/' + config.typename, req_rep)
-        })
-        .catch(function(e)){
-          debug('Er', e)
-        }
-
-    }
-
-    var req_rep = (req, rep) =>{
+    const req_rep = (req, res) =>{
       console.log('got req', req)
       rep.str = '{"test": true}'
-      return true
+      return new Promise((resolve, reject) => node.send({resolve, reject, req, res}));
+    }
+
+    console.log('intype  ', config.intype)
+   
+    if(config.intype === 'req'){
+      // do the req
+      // advertiseService with (req, rep)
+      rosPromise = ros_server(RED, node)
+      console.log("promise   ", rosPromise)
+      rosPromise.then(nodeHandle =>{
+        node.ros = nodeHandle
+        node.service =  node.service = node.ros.advertiseService(config.topicname, config.typepackage + '/' + config.typename, rep_req)
+
+      })
+      rosPromise.catch(e => {
+         debug('Er', e)
+      })
+  }
+    else{
+      // do the resp  
+      // node.on('input')
+      // callback using res
+      // assing res 
+      // resolve the promise 
+      node.on('input', function(msg)){
+        console.log('HERE IS THE Input')
+      }
     }
   }
   RED.nodes.registerType("ros-service-client", ros_service_client)
