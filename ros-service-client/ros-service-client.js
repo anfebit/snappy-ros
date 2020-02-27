@@ -42,11 +42,9 @@ module.exports = function(RED) {
   //     node.on('input', function(msg)){
   //       console.log('HERE IS THE Input')
   //     }
-  //   }
-  // }
-    RED.nodes.registerType("ros-service-client", ros_service_client)
+       }
     }
-  }
+    RED.nodes.registerType("ros-service-client", ros_service_client)
 }
 // module.exports = function(RED) {
 //   var ros_service_client = function(config) {
