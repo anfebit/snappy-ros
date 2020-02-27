@@ -11,11 +11,11 @@ module.exports = function(RED) {
     RED.nodes.createNode(this, config)
     var node = this
 
-    // const req_rep = (req, res) =>{
-    //   console.log('got req', req)
-    //   rep.str = '{"test": true}'
-    //   return new Promise((resolve, reject) => node.send({resolve, reject, req, res}));
-    // }
+    const req_rep = (req, res) =>{
+      console.log('got req', req)
+      rep.str = '{"test": true}'
+      return new Promise((resolve, reject) => node.send({resolve, reject, req, res}));
+    }
 
     console.log('intype  ', config.intype)
    
