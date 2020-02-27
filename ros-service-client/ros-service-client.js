@@ -35,15 +35,15 @@ module.exports = function(RED) {
       })
   }
     else{
-  //     // do the resp  
-  //     // node.on('input')
-  //     // callback using res
-  //     // assing res 
-  //     // resolve the promise 
-  //     node.on('input', function(msg)){
-  //       console.log('HERE IS THE Input')
-  //     }
-       }
+      // do the resp  
+      // node.on('input')
+      // callback using res
+      // assing res 
+      // resolve the promise 
+          node.on('input', function(msg) {
+          console.log('HERE IS THE Input   ', msg)
+          });
+         }
     }
     RED.nodes.registerType("ros-service-client", ros_service_client)
 }
