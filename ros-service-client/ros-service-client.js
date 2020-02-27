@@ -11,9 +11,8 @@ module.exports = function(RED) {
     RED.nodes.createNode(this, config)
     var node = this
 
-    const req_rep = (req, res) =>{
+    const req_res = (req, res) =>{
       console.log('got req', req)
-      rep.str = '{"test": true}'
       return new Promise((resolve, reject) => node.send({resolve, reject, req, res}));
     }
 
@@ -22,12 +21,12 @@ module.exports = function(RED) {
    
     if(config.intype === 'req'){
       // do the req
-      // advertiseService with (req, rep)
+      // advertiseService with (req, res)
       const rosPromise = ros_server(RED, node)
       console.log("promise   ", rosPromise)
       rosPromise.then(nodeHandle =>{
         node.ros = nodeHandle
-        node.service =  node.service = node.ros.advertiseService(config.topicname, config.typepackage + '/' + config.typename, rep_req)
+        node.service =  node.service = node.ros.advertiseService(config.topicname, 'asset_management/am', req_res)
         console.log("node.service   ", node.service)
       })
       rosPromise.catch(e => {
@@ -41,7 +40,10 @@ module.exports = function(RED) {
       // assing res 
       // resolve the promise 
           node.on('input', function(msg) {
-          console.log('HERE IS THE Input   ', msg)
+          msg.payload = res
+          console.log('HERE IS THE Input   ', res)
+          msg.res.str = JSON.stringify(msg.payload);
+          msg.resolve();
           });
          }
     }
