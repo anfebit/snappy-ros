@@ -8,7 +8,7 @@ module.exports = function(RED, node) {
   debug('Loading ROS Server')
 
   return new Promise(function(resolve, reject) {
-    var rosNodeName = 'Node-RED'
+    var rosNodeName = 'Node_RED'
 
     if (RED.settings.rosNodeName) {
       rosNodeName = RED.settings.rosNodeName
