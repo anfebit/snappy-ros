@@ -11,39 +11,39 @@ module.exports = function(RED) {
     RED.nodes.createNode(this, config)
     var node = this
 
-    const req_rep = (req, res) =>{
-      console.log('got req', req)
-      rep.str = '{"test": true}'
-      return new Promise((resolve, reject) => node.send({resolve, reject, req, res}));
-    }
+    // const req_rep = (req, res) =>{
+    //   console.log('got req', req)
+    //   rep.str = '{"test": true}'
+    //   return new Promise((resolve, reject) => node.send({resolve, reject, req, res}));
+    // }
 
     console.log('intype  ', config.intype)
    
     if(config.intype === 'req'){
-      // do the req
-      // advertiseService with (req, rep)
-      rosPromise = ros_server(RED, node)
-      console.log("promise   ", rosPromise)
-      rosPromise.then(nodeHandle =>{
-        node.ros = nodeHandle
-        node.service =  node.service = node.ros.advertiseService(config.topicname, config.typepackage + '/' + config.typename, rep_req)
+      // // do the req
+      // // advertiseService with (req, rep)
+      // rosPromise = ros_server(RED, node)
+      // console.log("promise   ", rosPromise)
+      // rosPromise.then(nodeHandle =>{
+      //   node.ros = nodeHandle
+      //   node.service =  node.service = node.ros.advertiseService(config.topicname, config.typepackage + '/' + config.typename, rep_req)
 
-      })
-      rosPromise.catch(e => {
-         debug('Er', e)
-      })
+      // })
+      // rosPromise.catch(e => {
+      //    debug('Er', e)
+      // })
   }
     else{
-      // do the resp  
-      // node.on('input')
-      // callback using res
-      // assing res 
-      // resolve the promise 
-      node.on('input', function(msg)){
-        console.log('HERE IS THE Input')
-      }
-    }
-  }
+  //     // do the resp  
+  //     // node.on('input')
+  //     // callback using res
+  //     // assing res 
+  //     // resolve the promise 
+  //     node.on('input', function(msg)){
+  //       console.log('HERE IS THE Input')
+  //     }
+  //   }
+  // }
   RED.nodes.registerType("ros-service-client", ros_service_client)
 }
 
