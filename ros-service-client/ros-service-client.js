@@ -26,7 +26,7 @@ module.exports = function(RED) {
       console.log("promise   ", rosPromise)
       rosPromise.then(nodeHandle =>{
         node.ros = nodeHandle
-        node.service = node.ros.advertiseService(config.topicname, 'asset_management/am', req_res)
+        node.service = node.ros.advertiseService(config.topicname, config.typepackage + '/' + config.typename, req_res)
         console.log("node.service   ", node.service)
       })
       rosPromise.catch(e => {
