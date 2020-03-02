@@ -27,7 +27,7 @@ module.exports = function(RED) {
       rosPromise.then(nodeHandle =>{
         node.ros = nodeHandle
         console.log('topic ' + config.topicname)
-        console.log('data type   ' + config.typepackage + '/' + config.typename)
+        console.log('data type   ' + config.typepackage + '.' + config.typename)
         node.service = node.ros.advertiseService(config.topicname, config.typepackage + '/' + config.typename, req_res)
         console.log("node.service   ", node.service)
       })
