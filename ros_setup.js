@@ -6,7 +6,7 @@ module.exports = function(RED) {
   debug("Registered routes")
 
   RED.httpAdmin.get("/packages", function(req, res) {
-    var packs = rosnodejs.getAvailableMessagePackages()
+    var packs = rosnodejs.loadAllPackages()
     var packages = []
     for (var key in packs) {
       if (packs.hasOwnProperty(key)) {
