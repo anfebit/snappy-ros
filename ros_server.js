@@ -16,7 +16,7 @@ module.exports = function(RED, node) {
     debug('settings rosNodeName exists :', rosNodeName)
 
     //Create a new nodeHandle or returns existing
-    rosnodejs.initNode(rosNodeName)
+    rosnodejs.initNode(rosNodeName, {onTheFly: true})
       .then((nodeHandle) => {
         debug('Created ROS nodeHandle')
 
