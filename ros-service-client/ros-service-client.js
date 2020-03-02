@@ -23,13 +23,7 @@ module.exports = function(RED) {
       console.log("promise   ", rosPromise)
       rosPromise.then(nodeHandle =>{
         node.ros = nodeHandle
-<<<<<<< HEAD
-        node.service = node.ros.advertiseService(config.topicname, 'std_srvs/Empty', req_res)
-=======
-        console.log('topic ' + config.topicname)
-        console.log('data type   ' + config.typepackage + '/' + config.typename)
         node.service = node.ros.advertiseService(config.topicname, config.typepackage + '/' + config.typename, req_res)
->>>>>>> 2c58cccfa46a0b33eaec654fae78b9f47da2704c
         console.log("node.service   ", node.service)
       })
       rosPromise.catch(e => {
@@ -37,6 +31,7 @@ module.exports = function(RED) {
       })
   }
     else{
+          console.log("n")
           node.on('input', function(msg) {
           console.log(msg);
           msg.payload = res
@@ -47,7 +42,3 @@ module.exports = function(RED) {
     }
     RED.nodes.registerType("ros-service-client", ros_service_client)
 }
-<<<<<<< HEAD
-=======
-
->>>>>>> 2c58cccfa46a0b33eaec654fae78b9f47da2704c
