@@ -146,42 +146,37 @@
 	</style>
 	<div class="form-row">
 		<label for="node-input-topicname">
-			<i class="icon-tag"></i> ROS Topic</label>
+			<i class="icon-tag"></i> ROS Topic </label>
 		<input type="text" id="node-input-topicname" placeholder="/mytopic">
 	</div>
 	
-	<div class="form-row">
-		<input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
-		<label for="vehicle1"> I have a bike</label><br>
-		<input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
-		<label for="vehicle2"> I have a car</label><br>
-	</div>
-	
-	<div class="form-row">
-		<label for="node-input-typepackage">Datatype msg</label>
-		<select id="node-input-typepackage"></select>
-	</div>
-
 	<div class="form-row">
 		<label for="node-input-intype">Res-Req</label>
         <select id="node-input-intype">
             <option value="req">Request</option>
             <option value="res">Response</option>
         </select>
-    </div>
+	</div>
+	
+	<div class="form-row">
+		<input type="checkbox" id="ch_msg" name="ch_message" value="Message">
+		<label for="ch_message">
+			<span> Message <span> </label>
+		<input type="checkbox" id="ch_srv" name="ch_service" value="Sevice">
+		<label for="ch_service"> 	
+			<span> Service <span></label>
+	</div>
+
+	
+	<div class="form-row">
+		<label for="node-input-typepackage">Datatype Package</label>
+		<select id="node-input-typepackage"></select>
+	</div>
 
 	<div class="form-row">
 		<label for="node-input-typename">Datatype</label>
 		<select id="node-input-typename"></select>
 	</div>
-
-	<div class="form-row">
-		<label for="node-input-">Res-Req</label>
-        <select id="node-input-intype">
-            <option value="req">Request</option>
-            <option value="res">Response</option>
-        </select>
-    </div>
 
 	<h4>Output is given in the format:</h4>
 	<pre id="msg_format">
