@@ -20,18 +20,15 @@ module.exports = function(RED) {
       try {
         var pack = rosnodejs.require(packages[i])
         if (pack) {
-          var pack_msg = pack.srv
-          if (typeof(pack_msg) != "undefined") { 
-            var ar = []
-              for (var msg in pack_msg) {
-                  if (pack_msg.hasOwnProperty(msg)) {
-                  msg = msg.trim()
-                  console.log("MSG   " + msg)
-                  if (msg.length > 0) {
-                      ar.push(msg)
-                  }
-                  }
+          var pack_msg = pack.msg
+          var ar = []
+          for (var msg in pack_msg) {
+            if (pack_msg.hasOwnProperty(msg)) {
+              msg = msg.trim()
+              if (msg.length > 0) {
+                ar.push(msg)
               }
+            }
           }
           ar = ar.sort()
           if (ar.length) {
