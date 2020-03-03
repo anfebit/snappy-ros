@@ -159,15 +159,13 @@
 	</div>
 	
 	<div class="form-row">
-		<input type="checkbox" id="ch_msg" name="ch_message" value="Message">
-		<label for="ch_message">
-			<span> Message <span> </label>
-		<input type="checkbox" id="ch_srv" name="ch_service" value="Sevice">
-		<label for="ch_service"> 	
-			<span> Service <span></label>
+		<label for="node-input-configuration">msg-svr</label>
+        <select id="node-input-configuration">
+            <option value="req">Message</option>
+            <option value="res">Service</option>
+        </select>
 	</div>
 
-	
 	<div class="form-row">
 		<label for="node-input-typepackage">Datatype Package</label>
 		<select id="node-input-typepackage"></select>
