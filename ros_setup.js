@@ -21,6 +21,7 @@ module.exports = function(RED) {
         var pack = rosnodejs.require(packages[i])
         if (pack) {
           var pack_msg = pack.svr
+          console.log("pack_msg  " + pack_msg)
           var ar = []
           for (var msg in pack_msg) {
             if (pack_msg.hasOwnProperty(msg)) {
