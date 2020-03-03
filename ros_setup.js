@@ -20,7 +20,7 @@ module.exports = function(RED) {
       try {
         var pack = rosnodejs.require(packages[i])
         if (pack) {
-          var pack_msg = pack.msg
+          var pack_msg = pack.svr
           var ar = []
           for (var msg in pack_msg) {
             if (pack_msg.hasOwnProperty(msg)) {
