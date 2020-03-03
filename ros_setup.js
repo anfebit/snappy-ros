@@ -20,7 +20,7 @@ module.exports = function(RED) {
       try {
         var pack = rosnodejs.require(packages[i])
         if (pack) {
-          var pack_msg = pack.svr
+          var pack_msg = pack.srv
           console.log("pack_msg  " + pack_msg)
           var ar = []
           for (var msg in pack_msg) {
