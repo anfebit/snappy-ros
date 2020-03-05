@@ -72,7 +72,7 @@
 			// 	node.typepackage = $('#node-input-typepackage').val()
 			// 	loadPackage(node.typepackage, node.typename)
 			// })
-			let selectedOpt = 'services' 
+			let selectedOpt = $('#node-input-configuration').val()
 			buildOptionList(selectedOpt)
 			$('#node-input-typepackage')
 				.html(window.list_package_html)
@@ -124,22 +124,6 @@
 		// setFormatText(typepackage + "/" + typename)
 	}
 
-	var loadPackage = function(typepackage, typename) {
-		var ar2 = window.list[typepackage]
-		console.log('ar2')
-		console.log(ar2)
-
-		// var o = ""
-		// for (var i = 0; i < ar2.length; i++) {
-		// 	o += '<option value="' + ar2[i] + '">' + ar2[i] + '</option>'
-		// }
-
-		// $('#node-input-typename').html(o)
-		// $("#node-input-typename")
-		// 	.val(typename)
-
-		// setFormatText(typepackage + "/" + typename)
-	}
 
 var buildOptionList = function(type){
 	$.getJSON(type, function(list) {
@@ -167,7 +151,7 @@ var buildOptionList = function(type){
 		$.getJSON('ROSInfo/' + package, function(data) {
 			var v = syntaxHighlight(data)
 			$('#msg_format').html(v)
-		})
+		})node-input-configuration"
 	}
 
 	function syntaxHighlight(json) {
