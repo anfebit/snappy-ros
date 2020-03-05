@@ -1,3 +1,26 @@
+<style>
+	.key {
+		color: #CC0000;
+	}
+
+	.string {
+		color: #007777;
+	}
+
+	.number {
+		color: #AA00AA;
+	}
+
+	.boolean {
+		color: #0000FF;
+	}
+
+	.null {
+		color: #0000FF;
+		font-weight: bold;
+	}
+</style>
+
 <script type="text/javascript">
 	RED.nodes.registerType('ros-service-client', {
 		category: 'ROS',
@@ -41,56 +64,105 @@
 				node.typename = 'String'
 			}
 
+			// $('#node-input-typepackage')
+			// 	.html(window.list_package_html)
+			// 	.val(node.typepackage)
+
+			// $('#node-input-typepackage').change(function() {
+			// 	node.typepackage = $('#node-input-typepackage').val()
+			// 	loadPackage(node.typepackage, node.typename)
+			// })
+			let selectedOpt = 'services' 
+			buildOptionList(selectedOpt)
 			$('#node-input-typepackage')
 				.html(window.list_package_html)
 				.val(node.typepackage)
 
-			$('#node-input-typepackage').change(function() {
-				node.typepackage = this.value
-				loadPackage(node.typepackage, node.typename)
+			$('#node-input-configuration').change(function() {
+				node.typepackage = $('#node-input-configuration').val()
+				selectedOpt = $('#node-input-configuration').val();
+			
+				//load msg or svr
+				buildOptionList(selectedOpt)
+		
 			})
 
-			$('#node-input-typename').change(function() {
-				node.typename = this.value
-				setFormatText(node.typepackage + "/" + node.typename)
+			$('#node-input-typepackage').change(function(){
+				console.log("HEEEEEEEEEEEEEEERE")
+				const valTypepackage = $('#node-input-typepackage').val()
+				console.log(valTypepackage)
+				loadPackage(valTypepackage)
+				
 			})
 
+			// $('#node-input-typepackage').change(function(){
+			// 	node.typename = $('#node-input-typepackage').val();
+			// 	setFormatText(node.typepackage + "/" + node.typename)
+				
+			// })
+			
 			loadPackage(node.typepackage, node.typename)
 		},
 
 		outputLabels: function(index) { return this.intype; }
 	})
 
-	var loadPackage = function(typepackage, typename) {
+	var loadPackage = function(typepackage) {
 		var ar2 = window.list[typepackage]
+		console.log('ar2')
+		console.log(ar2)
 
-		var o = ""
-		for (var i = 0; i < ar2.length; i++) {
-			o += '<option value="' + ar2[i] + '">' + ar2[i] + '</option>'
-		}
+		// var o = ""
+		// for (var i = 0; i < ar2.length; i++) {
+		// 	o += '<option value="' + ar2[i] + '">' + ar2[i] + '</option>'
+		// }
 
-		$('#node-input-typename').html(o)
-		$("#node-input-typename")
-			.val(typename)
+		// $('#node-input-typename').html(o)
+		// $("#node-input-typename")
+		// 	.val(typename)
 
-		setFormatText(typepackage + "/" + typename)
+		// setFormatText(typepackage + "/" + typename)
 	}
 
-	$.getJSON('packages', function(list) {
-		window.list = list
+	var loadPackage = function(typepackage, typename) {
+		var ar2 = window.list[typepackage]
+		console.log('ar2')
+		console.log(ar2)
 
+		// var o = ""
+		// for (var i = 0; i < ar2.length; i++) {
+		// 	o += '<option value="' + ar2[i] + '">' + ar2[i] + '</option>'
+		// }
+
+		// $('#node-input-typename').html(o)
+		// $("#node-input-typename")
+		// 	.val(typename)
+
+		// setFormatText(typepackage + "/" + typename)
+	}
+
+var buildOptionList = function(type){
+	$.getJSON(type, function(list) {
+		window["list_"+type] = list
+		console.log("windows")
+		console.log(window["list_"+type])
 		var o = ""
 		var o2 = []
-		for (var key in window.list) {
-			if (window.list.hasOwnProperty(key)) {
-				o += '<option value="' + key + '">' + key + '</option>'
-				o2.push(key)
-			}
+		for (var key in window["list_"+type].list) {
+			console.log("key   ")
+			console.log(key)
+			// if (window["list_"+type].list.hasOwnProperty(key)) {
+			o += '<option value="' + key + '">' + key + '</option>'
+			o2.push(key)
+			// }
 		}
+		
 		window.list_package_html = o
 		window.list_package = o2
 	})
+}
 
+	// "/ROSServInfo/:package/:serviceType"
 	function setFormatText(package) {
 		$.getJSON('ROSInfo/' + package, function(data) {
 			var v = syntaxHighlight(data)
@@ -122,52 +194,31 @@
 </script>
 
 <script type="text/x-red" data-template-name="ros-service-client">
-	<style>
-		.key {
-			// color: #CC0000;
-		}
-
-		.string {
-			color: #007777;
-		}
-
-		.number {
-			color: #AA00AA;
-		}
-
-		.boolean {
-			color: #0000FF;
-		}
-
-		.null {
-			color: #0000FF;
-			font-weight: bold;
-		}
-	</style>
+	
 	<div class="form-row">
 		<label for="node-input-topicname">
-			<i class="icon-tag"></i> ROS Topic </label>
+			<i class="icon-tag"></i> ROS Topic</label>
 		<input type="text" id="node-input-topicname" placeholder="/mytopic">
 	</div>
-	
+
+	<div class="form-row">
+		<label for="node-input-configuration">msg-svr</label>
+        <select id="node-input-configuration">
+            <option value="packages">Message</option>
+            <option value="services">Service</option>
+        </select>
+	</div>
+
 	<div class="form-row">
 		<label for="node-input-intype">Res-Req</label>
         <select id="node-input-intype">
             <option value="req">Request</option>
             <option value="res">Response</option>
         </select>
-	</div>
+    </div>
 	
 	<div class="form-row">
-		<label for="node-input-configuration">msg-svr</label>
-        <select id="node-input-configuration">
-            <option value="req">Message</option>
-            <option value="res">Service</option>
-        </select>
-	</div>
-
-	<div class="form-row">
-		<label for="node-input-typepackage">Datatype Package</label>
+		<label for="node-input-typepackage">Datatype package</label>
 		<select id="node-input-typepackage"></select>
 	</div>
 

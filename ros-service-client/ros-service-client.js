@@ -31,7 +31,6 @@ module.exports = function(RED) {
       })
   }
     else{
-          console.log("n")
           node.on('input', function(msg) {
           console.log(msg);
           msg.payload = res
